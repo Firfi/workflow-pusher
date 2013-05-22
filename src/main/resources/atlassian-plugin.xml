@@ -1,0 +1,39 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+    <component-import key="pluginScheduler">
+        <description>SAL Scheduler</description>
+        <interface>com.atlassian.sal.api.scheduling.PluginScheduler</interface>
+    </component-import>
+    <component-import key="pluginSettingsFactory">
+        <interface>com.atlassian.sal.api.pluginsettings.PluginSettingsFactory</interface>
+    </component-import>
+    <component key="schedulerComponent" class="ru.megaplan.jira.plugins.workflow.pusher.PusherServiceImpl"
+               system="true" public="true">
+        <description>
+            The plugin component that schedules the Pusher service.
+        </description>
+        <interface>com.atlassian.sal.api.lifecycle.LifecycleAware</interface>
+        <interface>ru.megaplan.jira.plugins.workflow.pusher.PusherService</interface>
+    </component>
+    <component key="settingsComponent" class="ru.megaplan.jira.plugins.workflow.pusher.PusherSettings">
+    </component>
+
+    <web-item key="schedulerActionLink" section="system.admin/system"
+              name="PusherServiceAction" weight="1">
+        <label>Pusher service</label>
+        <link linkId="schedulerActionLink">/secure/admin/PusherServiceAction!default.jspa</link>
+    </web-item>
+    <webwork1 key="schedulerAction" name="SAL Scheduler Example">
+        <actions>
+            <action name="ru.megaplan.jira.plugins.workflow.pusher.PusherServiceAction"
+                    alias="PusherServiceAction" roles-required="admin">
+                <view name="success">/templates/pusher.vm</view>
+                <view name="input">/templates/pusher.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+</atlassian-plugin>

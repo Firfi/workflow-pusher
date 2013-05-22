@@ -1,0 +1,106 @@
+<html>
+    <head>
+		<title>Pusher</title>
+        <meta name="decorator" content="atl.admin">
+    </head>
+<body>
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+    <tbody>
+        <tr>
+            <td>
+                <table class="jiraform maxWidth">
+                    <tbody>
+                        <tr>
+                            <td class="jiraformheader">
+                                <h3 class="formtitle">Scheduling</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="jiraformbody">
+                                <form method="post" action="PusherServiceAction!reschedule.jspa">
+                                    #set($i = 0)
+                                    #foreach($jobId in $jobIds)
+                                        <p>
+                                            #set($query = $lqueries.get($i))
+                                            #set($interval = $lintervals.get($i))
+                                            #set($user = $lusers.get($i))
+                                            #set($param = $lparams.get($i))
+                                            #set($customField = $lcustomFields.get($i))
+                                            <table>
+                                                <tr>
+                                                    <td>Job Id</td>
+                                                    <td><input type="text" name="jobIds" value="$!jobId"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Query</td>
+                                                    <td><textarea name="queries" value="$!query">$!query</textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Interval</td>
+                                                    <td><input type="text" name="intervals" value="$!interval"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>User</td>
+                                                    <td><input type="text" name="users" value="$!user"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Param</td>
+                                                    <td><input type="text" name="params" value="$!param"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Custom field</td>
+                                                    <td><input type="text" name="customFields" value="$!customField"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Delete</td>
+                                                    <td><input type="text" name="deletes" value="false"></td>
+                                                    <td>Put true here if u want delete it.</td>
+                                                </tr>
+
+                                            </table>
+
+                                        </p>
+                                        #set($i = $i + 1)
+                                    #end
+
+                                    <table>
+                                        <tr>
+                                            <td>New Job Id</td>
+                                            <td><textarea name="newJobId" value=""></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Query</td>
+                                            <td><textarea name="newQuery" value=""></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Interval</td>
+                                            <td><input type="text" name="newInterval" value="0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New User</td>
+                                            <td><input type="text" name="newUser" value=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Param</td>
+                                            <td><input type="text" name="newParam" value="0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Custom field</td>
+                                            <td><input type="text" name="newCustomField" value=""></td>
+                                        </tr>
+
+                                    </table>
+
+                                    <input type="submit" value="Apply">
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
